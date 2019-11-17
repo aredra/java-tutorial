@@ -5,6 +5,7 @@ public class StudentTest {
         Student student1 = new Student();
         student1.setStudentName("Aredra");
         student1.setAddress("Seoul");
+        student1.setStudentID(1);
 
         student1.showStudentInfo();
     }
