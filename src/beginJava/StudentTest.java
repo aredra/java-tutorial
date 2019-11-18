@@ -9,11 +9,7 @@ public class StudentTest {
 
         student1.showStudentInfo();
 
-        Person person1 = new Person();
-        person1.setAge(20);
-        person1.setName("aredra");
-        person1.setMarried(false);
-
+        Person person1 = new Person(20, "Aredra", true);
         person1.showPersonInfo();
 
         Order order1 = new Order();

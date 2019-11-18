@@ -5,6 +5,15 @@ public class Student {
     private String studentName;
     private String address;
 
+    //default constructor
+    public Student() {}
+
+    public Student(int id, String name, String address) {
+        this.studentID = id;
+        this.studentName = name;
+        this.address = address;
+    }
+
     public void showStudentInfo() {
         System.out.println(studentName + ", " + address);
     }
