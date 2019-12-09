@@ -8,9 +8,12 @@ public class TakeTransTest {
         Bus bus2 = new Bus(2, 2500);
         Subway subway1 = new Subway(1, 1250);
         Subway subway2 = new Subway(2, 5000);
+        StarCoffee coffee = new StarCoffee();
 
         p1.showPersonInfo();
         p2.showPersonInfo();
+
+        p2.buyCoffee(coffee, "americano");
 
         p2.takeBus(bus1);
         p2.takeBus(bus2);

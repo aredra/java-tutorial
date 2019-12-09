@@ -38,6 +38,15 @@ public class Person {
         }
     }
 
+    public void buyCoffee(StarCoffee brand, String type) {
+        if (this.money >= brand.getPay(type)) {
+            brand.buyCoffee(type);
+            this.money -= brand.getPay(type);
+        } else {
+            System.out.println("Lack Balance");
+        }
+    }
+
     public void showPersonInfo() {
         System.out.println(this.name+", "+this.age+"세, 잔액:"+this.money);
     }
