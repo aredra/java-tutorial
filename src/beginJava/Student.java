@@ -1,17 +1,22 @@
 package beginJava;
 
 public class Student {
+    private static int serialNum = 1000;
     private int studentID;
     private String studentName;
     private String address;
 
     //default constructor
-    public Student() {}
+    public Student() {
+        this.studentID = serialNum;
+        serialNum++;
+    }
 
     public Student(int id, String name, String address) {
-        this.studentID = id;
+        this.studentID = serialNum;
         this.studentName = name;
         this.address = address;
+        serialNum++;
     }
 
     public void showStudentInfo() {
@@ -34,5 +39,10 @@ public class Student {
     }
     public String getAddress() {
         return this.address;
+    }
+    public static int getSerialNum() {
+        int i = 0;
+        System.out.println("Student's serial no : " + serialNum);
+        return serialNum;
     }
 }

@@ -3,6 +3,9 @@ package beginJava;
 public class StudentTest {
     public static void main(String[] args) {
         Student student1 = new Student();
+        Student.getSerialNum();
+        Student student2 = new Student(23, "jy", "Busan");
+        Student.getSerialNum();
         student1.setStudentName("Aredra");
         student1.setAddress("Seoul");
         student1.setStudentID(1);
