@@ -4,10 +4,14 @@ import java.util.Calendar;
 
 public class CompanyTest {
     public static void main(String[] args) {
-        Company company1 = Company.getInstance();
-        Company company2 = Company.getInstance();
+        Company company = Company.getInstance();
 
-        System.out.println(company1);
-        System.out.println(company2);
+        System.out.println(company);
+
+        Staff staff1 = company.enterCompany();
+        Staff staff2 = company.enterCompany();
+
+        staff1.getStaffNumber();
+        staff2.getStaffNumber();
     }
 }
