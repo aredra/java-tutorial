@@ -14,4 +14,9 @@ public class CompleteCalc extends Calculator {
     public void showInfo() {
         System.out.println("Success");
     }
+
+    @Override
+    public void description() {
+        System.out.println("Override Calculator");
+    }
 }
