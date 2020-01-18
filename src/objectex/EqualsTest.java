@@ -24,7 +24,7 @@ public class EqualsTest {
         //String str1 = new String("abc");
         //String str2 = new String("abc");
 
-        //이럴 경우 모두 true 이유는?? 같은 주소를 참고하나? 누가 어떻게?
+        //이럴 경우 모두 true 이유는 상수풀에 저장된 값을 두 변수가 참고하기 때문
         String str1 = "abc";
         String str2 = "abc";
 

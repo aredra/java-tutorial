@@ -37,5 +37,13 @@ public class ToStringTest {
 
         System.out.println(book.hashCode());
         System.out.println(cloneBook.hashCode());
+
+        String java = new String("java");
+        String android = new String("android");
+        System.out.println(System.identityHashCode(java));
+
+        java = java.concat(android);
+        System.out.println(java);
+        System.out.println(System.identityHashCode(java));
     }
 }
