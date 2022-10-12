@@ -47,12 +47,8 @@ public class MyArray {
 
     public int removeElement(int position) {
         int ret = ERROR_NUM;
-        if (isEmpty()) {
-            System.out.println("Array is empty");
-            return ret;
-        }
-        if (position < 0 || position > count - 1) {
-            System.out.println("Invalid position");
+
+        if (!isValid(position)) {
             return ret;
         }
 
@@ -65,15 +61,35 @@ public class MyArray {
         return ret;
     }
 
+    public int getElement(int position) {
+        int ret = ERROR_NUM;
+
+        if (!isValid(position)) {
+            return ret;
+        }
+
+        ret = intArr[position];
+        return ret;
+    }
+
     public int getSize() {
         return count;
     }
 
     public boolean isEmpty() {
-        if (count == 0) {
-            return true;
+        return count == 0;
+    }
+
+    public boolean isValid(int position) {
+        if (isEmpty()) {
+            System.out.println("Array is empty");
+            return false;
         }
-        return false;
+        if (position < 0 || position > count - 1) {
+            System.out.println("Invalid position");
+            return false;
+        }
+        return true;
     }
 
     @Override

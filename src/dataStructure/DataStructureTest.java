@@ -25,5 +25,25 @@ public class DataStructureTest {
         System.out.println(myLinkedList);
         myLinkedList.insertElement(1, "a");
         System.out.println(myLinkedList);
+
+        MyArrayStack stack = new MyArrayStack(3);
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        System.out.println(stack);
+        System.out.println(stack.pop());
+        System.out.println(stack);
+        System.out.println(stack.peek());
+        System.out.println(stack);
+
+        MyLinkedQueue queue = new MyLinkedQueue();
+        queue.enQueue("A");
+        queue.enQueue("a");
+        queue.enQueue("B");
+        queue.enQueue("b");
+        queue.enQueue("C");
+        System.out.println(queue);
+        System.out.println(queue.deQueue());
+        System.out.println(queue);
     }
 }

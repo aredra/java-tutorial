@@ -90,6 +90,10 @@ public class MyLinkedList {
         return tempNode.getData();
     }
 
+    public boolean isEmpty() {
+        return this.head == null;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
