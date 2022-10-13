@@ -58,5 +58,7 @@ public class Member implements Comparable<Member>, Comparator<Member> {
     //첫번째 파람 this, 두번째 파람 변수
     public int compare(Member o1, Member o2) {
         return o1.memberName.compareTo(o2.getMemberName());
+
+        iterator - hasNext, next();
     }
 }
