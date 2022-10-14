@@ -1,5 +1,16 @@
 package collection;
 
+import java.util.Comparator;
+import java.util.TreeSet;
+
+class MyComparator implements Comparator<String> {
+
+    @Override
+    public int compare(String s1, String s2) {
+        return s1.compareTo(s2) * -1;
+    }
+}
+
 public class MemberTreeSetTest {
     public static void main(String[] args) {
         MemberTreeSet manager = new MemberTreeSet();
@@ -20,5 +31,24 @@ public class MemberTreeSetTest {
         manager.removeMember(2);
 
         manager.showAllMember();
+
+        TreeSet<String> treeSet = new TreeSet<>();
+        treeSet.add("A");
+        treeSet.add("a");
+        treeSet.add("B");
+        treeSet.add("b");
+        treeSet.add("C");
+        treeSet.add("c");
+        System.out.println(treeSet);
+
+        TreeSet<String> treeSet2 = new TreeSet<>(new MyComparator());
+        treeSet2.add("A");
+        treeSet2.add("a");
+        treeSet2.add("B");
+        treeSet2.add("b");
+        treeSet2.add("C");
+        treeSet2.add("c");
+        System.out.println(treeSet2);
+
     }
 }
