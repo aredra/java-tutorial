@@ -17,15 +17,16 @@ class FastLibrary {
     public synchronized String lendBook() throws InterruptedException{
         Thread th = Thread.currentThread();
         while (books.size() == 0) {
-            System.out.println(th.getName() + " is lending");
+            System.out.println(th.getName() + " waiting start");
             wait();
+            System.out.println(th.getName() + " waiting end");
         }
         String title = books.remove(0);
         System.out.println(th.getName() + " lend : " + title);
         return title;
     }
 
-    public synchronized void reurnBook(String title) {
+    public synchronized void returnBook(String title) {
         Thread th = Thread.currentThread();
         books.add(title);
         notifyAll();
@@ -38,7 +39,7 @@ class Person extends Thread {
         try {
             String title = LibraryMain.library.lendBook();
             sleep(2000);
-            LibraryMain.library.reurnBook(title);
+            LibraryMain.library.returnBook(title);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

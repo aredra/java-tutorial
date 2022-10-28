@@ -13,7 +13,7 @@ public class JoinTest extends Thread {
     public void run() {
         int i;
         for (i=start; i<=end; i++) {
-            total += i;
+            this.total += i;
         }
     }
 

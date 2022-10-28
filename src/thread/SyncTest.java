@@ -62,7 +62,7 @@ class T2 extends Thread {
 }
 
 public class SyncTest {
-    public static Bank myBank = new Bank();
+    public static final Bank myBank = new Bank();
     public static void main(String[] args) throws InterruptedException{
         T1 t1 = new T1();
         t1.start();

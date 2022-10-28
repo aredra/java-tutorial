@@ -6,7 +6,7 @@ public class ConsoleTest {
     public static void main(String[] arsg) {
         Console console = System.console();
         System.out.println("Name: ");
-        String name = ((Console) console).readLine();
+        String name = console.readLine();
         System.out.println("PW: ");
         char[] password = console.readPassword();
 

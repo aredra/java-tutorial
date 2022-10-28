@@ -49,3 +49,6 @@ public class ThreadTest {
         System.out.println("end");
     }
 }
+
+// sleep, wait, join runnable -> non runnable
+//
