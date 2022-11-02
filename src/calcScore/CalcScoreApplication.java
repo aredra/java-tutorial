@@ -1,12 +1,19 @@
 package calcScore;
 
+import calcScore.model.Department;
+import calcScore.model.Score;
+import calcScore.model.Student;
+import calcScore.model.Subject;
+import calcScore.service.GenerateReport;
+import calcScore.utils.Constant;
+
 public class CalcScoreApplication {
     public static void main(String[] args) {
-        Subject math = new Subject("수학");
-        Subject korean = new Subject("국어");
+        Subject math = new Subject(Constant.MATH);
+        Subject korean = new Subject(Constant.KOREAN);
 
-        Department computer = new Department("컴퓨터", math);
-        Department language = new Department("국문", korean);
+        Department computer = new Department(Constant.COMPUTER, math);
+        Department language = new Department(Constant.LANGUAGE, korean);
 
         Student kim = new Student("kim", computer);
         Student seo = new Student("seo", language);
@@ -17,7 +24,9 @@ public class CalcScoreApplication {
         seo.addScore(new Score(seo.getStudentId(), math, 81));
         seo.addScore(new Score(seo.getStudentId(), korean, 81));
 
-        kim.printScoreGrade();
-        seo.printScoreGrade();
+        GenerateReport report = new GenerateReport();
+
+        report.printScoreGrade(kim);
+        report.printScoreGrade(seo);
     }
 }

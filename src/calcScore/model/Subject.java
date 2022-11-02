@@ -1,6 +1,6 @@
-package calcScore;
+package calcScore.model;
 
-public class Subject implements IDomainModel{
+public class Subject implements IDomainModel {
     private String subjectId;
     private String subjectName;
 

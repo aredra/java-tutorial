@@ -1,4 +1,4 @@
-package calcScore;
+package calcScore.model;
 
 import java.util.Date;
 import java.util.Random;

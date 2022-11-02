@@ -1,8 +1,6 @@
-package calcScore;
+package calcScore.model;
 
-import java.util.concurrent.atomic.AtomicReference;
-
-public class Department implements IDomainModel{
+public class Department implements IDomainModel {
     private String departmentId;
     private String departmentName;
     private Subject requiredSubject;

@@ -1,4 +1,4 @@
-package calcScore;
+package calcScore.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,20 +50,5 @@ public class Student implements IDomainModel {
 
     public void addScore(Score score) {
         scores.add(score);
-    }
-
-    public void printScoreGrade() {
-        StringBuilder builder = new StringBuilder();
-        for (Score score : scores) {
-            builder.append(this.studentId + ", " + this.studentName + ", ");
-            int scoreInt = score.getScore();
-            boolean isMajorSubject =
-                    score.getSubject().getSubjectId() == this.department.getRequiredSubject().getSubjectId();
-            String scoreGrade = isMajorSubject ? department.getMajorSubjectGrade(scoreInt) : department.getNormalSubjectGrade(scoreInt);
-            builder.append(score.getSubject().getSubjectName() + ", ")
-                    .append(scoreInt + ", ")
-                    .append(scoreGrade + "\n");
-        }
-        System.out.println(builder);
     }
 }

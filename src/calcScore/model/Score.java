@@ -1,4 +1,4 @@
-package calcScore;
+package calcScore.model;
 
 public class Score {
     private String studentId;
