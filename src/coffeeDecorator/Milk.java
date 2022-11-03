@@ -1,13 +1,15 @@
 package coffeeDecorator;
 
-public class Milk extends Decorator{
+public class Milk extends Coffee{
+    Coffee coffee;
+
     public Milk(Coffee coffee) {
-        super(coffee);
+        this.coffee = coffee;
     }
 
     @Override
     public void brewing() {
-        super.brewing();
+        coffee.brewing();
         System.out.println("adding milk");
     }
 }
