@@ -1,5 +1,6 @@
 package algorithm;
 
+
 public class SimpleBinarySearch {
     public static void main(String[] args) {
         int[] inputs = {12, 25, 31, 48, 54, 66, 70, 83, 95, 100};
