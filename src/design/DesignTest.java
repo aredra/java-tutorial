@@ -14,6 +14,7 @@ import design.proxy.IBrowser;
 import design.singleton.AClazz;
 import design.singleton.BClazz;
 import design.singleton.SocketClient;
+import design.strategy.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -91,6 +92,22 @@ public class DesignTest {
         sftpClient.write();
         sftpClient.read();
         sftpClient.disConnect();
+
+        Encoder encoder = new Encoder();
+        EncodingStrategy base64 = new Base64Strategy();
+        EncodingStrategy normal = new NormalStrategy();
+        EncodingStrategy append = new AppendStrategy();
+
+        String message = "Hello world!";
+
+        encoder.setEncodingStrategy(base64);
+        System.out.println(encoder.getMessage(message));
+
+        encoder.setEncodingStrategy(normal);
+        System.out.println(encoder.getMessage(message));
+
+        encoder.setEncodingStrategy(append);
+        System.out.println(encoder.getMessage(message));
     }
 
     public static void connect(Electronic110V electronic110V) {
