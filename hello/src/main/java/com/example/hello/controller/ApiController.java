@@ -1,6 +1,8 @@
 package com.example.hello.controller;
 
 import com.example.hello.dto.UserRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -12,6 +14,11 @@ public class ApiController {
     @GetMapping("/hello")
     public String hello() {
         return "Hello world!";
+    }
+
+    @GetMapping("/json")
+    public UserRequest json(UserRequest userRequest) {
+        return userRequest;
     }
 
     @GetMapping(path = "/path-variable/{message}")
@@ -58,15 +65,17 @@ public class ApiController {
         });
     }
 
+    // req - object mapper - object - method - object - mapper - json - response
     @PostMapping("/post-dto")
-    public void post(@RequestBody UserRequest userRequest) {
+    public UserRequest post(@RequestBody UserRequest userRequest) {
         System.out.println(userRequest.toString());
+        return userRequest;
     }
 
     @PutMapping("/put")
-    public UserRequest put(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserRequest> put(@RequestBody UserRequest userRequest) {
         System.out.println(userRequest.toString());
-        return userRequest;
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRequest);
     }
 
     @DeleteMapping("/delete/{id}")

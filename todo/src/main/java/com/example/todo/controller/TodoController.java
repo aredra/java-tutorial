@@ -4,7 +4,6 @@ import com.example.todo.model.TodoEntity;
 import com.example.todo.model.TodoRequest;
 import com.example.todo.model.TodoResponse;
 import com.example.todo.service.TodoService;
-import com.sun.tools.javac.comp.Todo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
