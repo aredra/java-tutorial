@@ -49,4 +49,30 @@ public class ApiController {
 
         return userRequest.toString();
     }
+
+    @PostMapping("/post")
+    public void post(@RequestBody Map<String, Object> requestData) {
+        requestData.forEach((key, value) -> {
+            System.out.println(key);
+            System.out.println(value);
+        });
+    }
+
+    @PostMapping("/post-dto")
+    public void post(@RequestBody UserRequest userRequest) {
+        System.out.println(userRequest.toString());
+    }
+
+    @PutMapping("/put")
+    public UserRequest put(@RequestBody UserRequest userRequest) {
+        System.out.println(userRequest.toString());
+        return userRequest;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable String id,
+                       @RequestParam(required = false) String account) {
+
+        System.out.println(id + ", " + account);
+    }
 }
