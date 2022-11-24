@@ -1,5 +1,7 @@
 package com.example.hello.controller;
 
+import com.example.hello.annotation.Decode;
+import com.example.hello.annotation.Timer;
 import com.example.hello.dto.UserModel;
 import com.example.hello.dto.UserRequest;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -68,14 +70,15 @@ public class ApiController {
     }
 
     // req - object mapper - object - method - object - mapper - json - response
+    @Decode
+    @Timer
     @PostMapping("/post-dto")
-    public UserRequest post(@RequestBody UserRequest userRequest) {
-        System.out.println(userRequest.toString());
+    public UserModel postUserModel(@RequestBody UserModel userRequest) {
         return userRequest;
     }
 
     @PutMapping("/put")
-    public ResponseEntity<UserRequest> put(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<UserModel> put(@RequestBody UserModel userRequest) {
         System.out.println(userRequest.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(userRequest);
     }
@@ -93,9 +96,10 @@ public class ApiController {
         return id + " : " + name;
     }
 
+    @Timer
     @PostMapping("/aop/post")
-    public UserModel post(@RequestBody UserModel user) {
-
+    public UserModel post(@RequestBody UserModel user) throws InterruptedException {
+        Thread.sleep(1000);
         return user;
     }
 }
