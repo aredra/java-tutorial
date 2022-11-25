@@ -4,7 +4,6 @@ import com.example.hello.annotation.Decode;
 import com.example.hello.annotation.Timer;
 import com.example.hello.dto.UserModel;
 import com.example.hello.dto.UserRequest;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
