@@ -4,12 +4,17 @@ import com.example.hello.annotation.Decode;
 import com.example.hello.annotation.Timer;
 import com.example.hello.dto.UserModel;
 import com.example.hello.dto.UserRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class ApiController {
@@ -100,5 +105,27 @@ public class ApiController {
     public UserModel post(@RequestBody UserModel user) throws InterruptedException {
         Thread.sleep(1000);
         return user;
+    }
+
+    @PostMapping("/valid/echo")
+    public ResponseEntity<?> postEcho(@Valid @RequestBody UserModel user,
+                                      BindingResult bindingResult) {
+
+        log.debug(user.toString());
+
+        if (bindingResult.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            bindingResult.getAllErrors().forEach(objectError -> {
+                FieldError fieldError = (FieldError) objectError;
+                String errorMessage = objectError.getDefaultMessage();
+
+                sb.append("Field: ").append(fieldError.getField()).append(", Message: ").append(errorMessage).append("\n");
+                log.error(sb.toString());
+            });
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb);
+        }
+
+        return ResponseEntity.ok(user);
     }
 }

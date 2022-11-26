@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 public class HelloApplication {
 
@@ -15,6 +17,12 @@ public class HelloApplication {
         ApplicationContext context = ApplicationContextProvider.getContext();
 
         ApiController apiController = context.getBean(ApiController.class);
+
+        String[] beanNames = context.getBeanDefinitionNames();
+
+        System.out.println(">>>>>>>>>>>>>> Beans start");
+        Arrays.stream(beanNames).forEach(System.out::println);
+        System.out.println(">>>>>>>>>>>>>> Beans end");
     }
 
 }
