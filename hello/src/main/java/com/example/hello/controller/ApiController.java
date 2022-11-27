@@ -1,20 +1,26 @@
 package com.example.hello.controller;
 
+import com.example.hello.annotation.Auth;
 import com.example.hello.annotation.Decode;
 import com.example.hello.annotation.Timer;
-import com.example.hello.dto.UserModel;
+import com.example.hello.dto.User;
 import com.example.hello.dto.UserRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Map;
 
 @Slf4j
+@Auth
+@Validated
 @RestController
 @RequestMapping("/api")
 public class ApiController {
@@ -73,16 +79,8 @@ public class ApiController {
         });
     }
 
-    // req - object mapper - object - method - object - mapper - json - response
-    @Decode
-    @Timer
-    @PostMapping("/post-dto")
-    public UserModel postUserModel(@RequestBody UserModel userRequest) {
-        return userRequest;
-    }
-
     @PutMapping("/put")
-    public ResponseEntity<UserModel> put(@RequestBody UserModel userRequest) {
+    public ResponseEntity<User> put(@RequestBody User userRequest) {
         System.out.println(userRequest.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(userRequest);
     }
@@ -100,15 +98,25 @@ public class ApiController {
         return id + " : " + name;
     }
 
+    // TODO aop
     @Timer
     @PostMapping("/aop/post")
-    public UserModel post(@RequestBody UserModel user) throws InterruptedException {
+    public User post(@Valid @RequestBody User user) throws InterruptedException {
         Thread.sleep(1000);
         return user;
     }
 
+    // req - object mapper - object - method - object - mapper - json - response
+    @Decode
+    @Timer
+    @PostMapping("/aop/post-dto")
+    public User postUserModel(@RequestBody User userRequest) {
+        return userRequest;
+    }
+
+    // TODO validation
     @PostMapping("/valid/echo")
-    public ResponseEntity<?> postEcho(@Valid @RequestBody UserModel user,
+    public ResponseEntity<?> postEcho(@Valid @RequestBody User user,
                                       BindingResult bindingResult) {
 
         log.debug(user.toString());
@@ -127,5 +135,16 @@ public class ApiController {
         }
 
         return ResponseEntity.ok(user);
+    }
+
+    // TODO exception
+    @GetMapping("/exception/get")
+    public User exceptionGet(@Size(min = 1) @RequestParam String name, @Min(0) @RequestParam int age) {
+
+        User user = new User();
+        user.setName(name);
+        user.setAge(age);
+
+        return user;
     }
 }
