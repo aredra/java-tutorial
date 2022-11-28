@@ -16,7 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,24 +47,36 @@ class TodoControllerTest {
     void create() throws Exception {
         when(this.todoService.add(any(TodoRequest.class)))
                 .then((i) -> {
+                    System.out.println(i);
                     TodoRequest request = i.getArgument(0, TodoRequest.class);
                     return new TodoEntity(this.expected.getId(),
-                            request.getTitle(), this.expected.getOrder(),
-                            this.expected.getCompleted());
+                            request.getTitle(), request.getOrder(),
+                            request.getCompleted());
                 });
 
         TodoRequest request = new TodoRequest();
         request.setTitle("Any title");
+        request.setCompleted(true);
+        request.setOrder(1L);
 
         ObjectMapper mapper = new ObjectMapper();
         String content = mapper.writeValueAsString(request);
 
         this.mvc.perform(post("/").contentType(MediaType.APPLICATION_JSON).content(content))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Any title"));
+                .andExpect(jsonPath("$.title").value("Any title"))
+                .andExpect(jsonPath("$.order").value(1L))
+                .andExpect(jsonPath("$.completed").value(true));
     }
 
     @Test
-    void readOne() {
+    void readOne() throws Exception {
+
+        when(this.todoService.searchById(anyLong()))
+                .thenReturn(this.expected);
+
+        this.mvc.perform(get("/1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Test title"));
     }
 }
