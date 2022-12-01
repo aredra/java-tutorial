@@ -5,6 +5,9 @@ import com.example.hello.annotation.Decode;
 import com.example.hello.annotation.Timer;
 import com.example.hello.dto.User;
 import com.example.hello.dto.UserRequest;
+import com.example.hello.service.AsyncService;
+import io.swagger.annotations.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,19 +20,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Auth
 @Validated
 @RestController
+@Api(tags = "기타 API 모음")
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class ApiController {
+
+    private final AsyncService asyncService;
 
     @GetMapping("/hello")
     public String hello() {
         return "Hello world!";
     }
 
+    @GetMapping("/plus/{x}")
+    public int plus(@ApiParam(value = "엑스 값") @PathVariable int x,
+                    @ApiParam(value = "와이 값") @RequestParam int y) {
+        return x + y;
+    }
+
+    @ApiOperation(value = "사용자를 에코")
+    @ApiResponse(code = 500, message = "사용자 정보가 이상하다.")
     @GetMapping("/json")
     public UserRequest json(UserRequest userRequest) {
         return userRequest;
@@ -56,6 +72,11 @@ public class ApiController {
         return sb.toString();
     }
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "사용자 이름"),
+            @ApiImplicitParam(name = "age", value = "사용자 나이"),
+            @ApiImplicitParam(name = "job", value = "사용자 직업")
+    })
     @GetMapping("/query-particle")
     public String returnQueryParameter(@RequestParam String name,
                                        @RequestParam int age,
@@ -91,7 +112,7 @@ public class ApiController {
 
         System.out.println(id + ", " + account);
     }
-    
+
     @GetMapping("/aop/get/{id}")
     public String get(@PathVariable Long id, @RequestParam String name) {
 
@@ -115,6 +136,7 @@ public class ApiController {
     }
 
     // TODO validation
+    @ApiOperation(value = "Post 에코")
     @PostMapping("/valid/echo")
     public ResponseEntity<?> postEcho(@Valid @RequestBody User user,
                                       BindingResult bindingResult) {
@@ -146,5 +168,11 @@ public class ApiController {
         user.setAge(age);
 
         return user;
+    }
+
+    @GetMapping("/async/hello")
+    public CompletableFuture asyncHello() {
+        log.info("Method end");
+        return asyncService.run();
     }
 }

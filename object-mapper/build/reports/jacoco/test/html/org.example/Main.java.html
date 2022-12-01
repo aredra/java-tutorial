@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">object-mapper</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package org.example;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Arrays;
+import java.util.List;
+
+@SpringBootApplication
+<span class="fc" id="L17">public class Main {</span>
+    public static void main(String[] args) throws JsonProcessingException {
+
+<span class="nc" id="L20">        SpringApplication.run(Main.class, args);</span>
+
+<span class="nc" id="L22">        ObjectMapper objectMapper = new ObjectMapper();</span>
+
+<span class="nc" id="L24">        Owner owner = new Owner();</span>
+<span class="nc" id="L25">        owner.setAge(9999);</span>
+<span class="nc" id="L26">        owner.setName(&quot;text&quot;);</span>
+
+<span class="nc" id="L28">        Car car1 = new Car();</span>
+<span class="nc" id="L29">        car1.setName(&quot;KIA&quot;);</span>
+<span class="nc" id="L30">        car1.setType(&quot;Sedan&quot;);</span>
+
+<span class="nc" id="L32">        Car car2 = new Car();</span>
+<span class="nc" id="L33">        car2.setName(&quot;BMW&quot;);</span>
+<span class="nc" id="L34">        car2.setType(&quot;Sedan&quot;);</span>
+
+<span class="nc" id="L36">        owner.setCars(Arrays.asList(car1, car2));</span>
+
+<span class="nc" id="L38">        System.out.println(owner);</span>
+
+<span class="nc" id="L40">        String json = objectMapper.writeValueAsString(owner);</span>
+<span class="nc" id="L41">        System.out.println(json);</span>
+
+<span class="nc" id="L43">        JsonNode jsonNode = objectMapper.readTree(json);</span>
+<span class="nc" id="L44">        String _name = jsonNode.get(&quot;name&quot;).asText();</span>
+<span class="nc" id="L45">        int _age = jsonNode.get(&quot;age&quot;).asInt();</span>
+
+<span class="nc" id="L47">        ArrayNode cars = (ArrayNode) jsonNode.get(&quot;cars&quot;);</span>
+<span class="nc" id="L48">        List&lt;Car&gt; _cars = objectMapper.convertValue(cars, new TypeReference&lt;List&lt;Car&gt;&gt;() {</span>
+        });
+
+<span class="nc" id="L51">        ObjectNode objectNode = (ObjectNode) jsonNode;</span>
+<span class="nc" id="L52">        objectNode.put(&quot;name&quot;, &quot;foo&quot;);</span>
+<span class="nc" id="L53">        objectNode.put(&quot;age&quot;, 99999);</span>
+
+<span class="nc" id="L55">        System.out.println(objectNode.toPrettyString());</span>
+<span class="nc" id="L56">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

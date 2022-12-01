@@ -19,15 +19,15 @@ class DollarCalculatorTest {
     private Calculator calculator;
 
     @Test
-    private void dollarCalculatorTest() {
+    public void dollarCalculatorTest() {
 
-        Mockito.when(marketApi.connect()).thenReturn(3000);
+        Mockito.when(marketApi.connect()).thenReturn(1200);
 
         int sum = calculator.plus(10, 10);
-        int diff = calculator.minus(203, 20);
+        int diff = calculator.minus(20, 20);
 
-        Assertions.assertEquals(50000, sum);
-        Assertions.assertEquals(50000, diff);
+        Assertions.assertEquals(24000, sum);
+        Assertions.assertEquals(0, diff);
 
     }
 }

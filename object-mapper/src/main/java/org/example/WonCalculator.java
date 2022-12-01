@@ -21,4 +21,9 @@ public class WonCalculator implements ICalculator {
 
         return x - y;
     }
+
+    @Override
+    public void init() {
+
+    }
 }
