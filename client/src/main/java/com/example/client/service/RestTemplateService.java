@@ -19,7 +19,7 @@ import java.util.Objects;
 @Service
 public class RestTemplateService {
 
-    private String BASE_SERVER_URL = "http://localhost:8090";
+    private final String BASE_SERVER_URL = "http://localhost:8090";
 
     public UserResponse hello() {
         URI uri = UriComponentsBuilder

@@ -6,12 +6,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
+
+        SpringApplication.run(Main.class, args);
 
         ObjectMapper objectMapper = new ObjectMapper();
 
