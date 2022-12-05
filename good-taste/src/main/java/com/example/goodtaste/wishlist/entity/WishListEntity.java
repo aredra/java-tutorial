@@ -19,7 +19,7 @@ public class WishListEntity extends MemoryDbEntity {
 
     private String address;
 
-    private String readAddress;
+    private String roadAddress;
 
     private String homePageLink;
 

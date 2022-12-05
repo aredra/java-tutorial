@@ -61,7 +61,7 @@ class WishListRepositoryTest {
         var updatedEntity = wishListRepository.save(wishListDummy);
 
         Assertions.assertEquals("Updated title", updatedEntity.getTitle());
-        Assertions.assertEquals(1, wishListRepository.listAll().size());
+        Assertions.assertEquals(1, wishListRepository.findAll().size());
     }
 
     @Test
@@ -78,7 +78,7 @@ class WishListRepositoryTest {
     public void deleteById() {
         wishListRepository.save(wishListDummy);
         wishListRepository.deleteById(1);
-        int dbSize = wishListRepository.listAll().size();
+        int dbSize = wishListRepository.findAll().size();
 
         Assertions.assertEquals(0, dbSize);
     }
@@ -90,8 +90,8 @@ class WishListRepositoryTest {
         var wishListDummy2 = createDummy();
         wishListRepository.save(wishListDummy2);
 
-        System.out.println(wishListRepository.listAll());
-        int dbSize = wishListRepository.listAll().size();
+        System.out.println(wishListRepository.findAll());
+        int dbSize = wishListRepository.findAll().size();
         Assertions.assertEquals(2, dbSize);
     }
 }
