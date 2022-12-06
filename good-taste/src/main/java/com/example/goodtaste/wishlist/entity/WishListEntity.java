@@ -1,18 +1,21 @@
 package com.example.goodtaste.wishlist.entity;
 
-import com.example.goodtaste.db.MemoryDbEntity;
 import lombok.*;
-import lombok.experimental.Accessors;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
-@Accessors(chain = true)
 @NoArgsConstructor
-@AllArgsConstructor
-public class WishListEntity extends MemoryDbEntity {
+public class WishListEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String title;
 
     private String category;

@@ -15,7 +15,7 @@ class WishListRepositoryTest {
     private WishListEntity wishListDummy;
 
     @Autowired
-    public WishListRepository wishListRepository;
+    public IWishListRepository wishListRepository;
 
     @BeforeEach
     void setUp() {

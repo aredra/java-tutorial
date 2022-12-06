@@ -5,7 +5,7 @@ import com.example.goodtaste.naver.dto.SearchImageReq;
 import com.example.goodtaste.naver.dto.SearchLocalReq;
 import com.example.goodtaste.wishlist.dto.WishListDto;
 import com.example.goodtaste.wishlist.entity.WishListEntity;
-import com.example.goodtaste.wishlist.repository.WishListRepository;
+import com.example.goodtaste.wishlist.repository.IWishListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class WishListService {
 
     private final NaverClient naverClient;
 
-    private final WishListRepository wishListRepository;
+    private final IWishListRepository wishListRepository;
 
     public WishListDto search(String query) {
 
@@ -60,7 +60,7 @@ public class WishListService {
 
     private WishListEntity dtoToEntity(WishListDto wishListDto) {
         var entity = new WishListEntity();
-        entity.setIndex(wishListDto.getIndex());
+        entity.setId(wishListDto.getId());
         entity.setTitle(wishListDto.getTitle());
         entity.setCategory(wishListDto.getCategory());
         entity.setAddress(wishListDto.getAddress());
@@ -76,7 +76,7 @@ public class WishListService {
 
     private WishListDto entityToDto(WishListEntity wishListEntity) {
         var dto = new WishListDto();
-        dto.setIndex(wishListEntity.getIndex());
+        dto.setId(wishListEntity.getId());
         dto.setTitle(wishListEntity.getTitle());
         dto.setCategory(wishListEntity.getCategory());
         dto.setAddress(wishListEntity.getAddress());
@@ -95,12 +95,12 @@ public class WishListService {
                 .map(this::entityToDto).collect(Collectors.toList());
     }
 
-    public void delete(int index) {
-        wishListRepository.deleteById(index);
+    public void delete(Long id) {
+        wishListRepository.deleteById(id);
     }
 
-    public void addVisit(int index) {
-        var wishItem = wishListRepository.findById(index);
+    public void addVisit(Long id) {
+        var wishItem = wishListRepository.findById(id);
         if (wishItem.isPresent()) {
             var item = wishItem.get();
             item.setVisit(true);

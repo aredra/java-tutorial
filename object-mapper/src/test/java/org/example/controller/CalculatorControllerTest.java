@@ -1,6 +1,5 @@
 package org.example.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.component.Calculator;
 import org.example.component.DollarCalculator;

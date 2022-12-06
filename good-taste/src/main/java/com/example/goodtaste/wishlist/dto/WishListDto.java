@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class WishListDto {
 
-    private Integer index;
+    private Long id;
 
     private String title;
 
