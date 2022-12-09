@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 7070
+
+naver:
+  client:
+  url:
+    search:
+      local: https://openapi.naver.com/v1/search/local.json
+      image: https://openapi.naver.com/v1/search/image
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+springfox:
+  documentation:
+    enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prd
+
+springfox:
+  documentation:
+    enabled: false

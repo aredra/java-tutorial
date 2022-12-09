@@ -1,13 +1,16 @@
 package com.example.goodtaste.wishlist.entity;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
-@Entity
+@Entity(name = "wish_list")
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 public class WishListEntity {
 
@@ -33,5 +36,9 @@ public class WishListEntity {
     private int visitCount;
 
     private LocalDateTime lastVisitDate;
+
+    private OffsetDateTime createdAt;
+
+    private OffsetDateTime updatedAt;
 
 }

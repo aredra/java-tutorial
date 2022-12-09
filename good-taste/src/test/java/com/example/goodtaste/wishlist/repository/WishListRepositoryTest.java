@@ -23,7 +23,7 @@ class WishListRepositoryTest {
         wishListDummy.setTitle("title")
                 .setCategory("category")
                 .setAddress("address")
-                .setReadAddress("readAddress")
+                .setRoadAddress("readAddress")
                 .setHomePageLink("")
                 .setImageLink("")
                 .setVisit(false)
@@ -36,7 +36,7 @@ class WishListRepositoryTest {
         wishListDummy.setTitle("title")
                 .setCategory("category")
                 .setAddress("address")
-                .setReadAddress("readAddress")
+                .setRoadAddress("readAddress")
                 .setHomePageLink("")
                 .setImageLink("")
                 .setVisit(false)
@@ -50,7 +50,7 @@ class WishListRepositoryTest {
     public void saveTest() {
         var expected = wishListRepository.save(wishListDummy);
         Assertions.assertNotNull(expected);
-        Assertions.assertEquals(1, expected.getIndex());
+        Assertions.assertEquals(1, expected.getId());
     }
 
     @Test
@@ -68,16 +68,16 @@ class WishListRepositoryTest {
     public void findById() {
         wishListRepository.save(wishListDummy);
 
-        var expected = wishListRepository.findById(1);
+        var expected = wishListRepository.findById(1L);
         assertTrue(expected.isPresent());
-        Assertions.assertEquals(1, expected.get().getIndex());
+        Assertions.assertEquals(1, expected.get().getId());
 
     }
 
     @Test
     public void deleteById() {
         wishListRepository.save(wishListDummy);
-        wishListRepository.deleteById(1);
+        wishListRepository.deleteById(1L);
         int dbSize = wishListRepository.findAll().size();
 
         Assertions.assertEquals(0, dbSize);
