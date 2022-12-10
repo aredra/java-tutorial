@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 public class WishListEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
 
     @Column(nullable = false)
