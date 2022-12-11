@@ -53,4 +53,19 @@ class IWishListRepositoryTest {
         Example<WishListEntity> example = Example.of(wishList, matcher);
         wishListRepository.findAll(example);
     }
+
+    @Test
+    void save() {
+        wishListRepository.save(new WishListEntity().setTitle("Save title"));
+
+        WishListEntity wishList = wishListRepository.findById(1L).orElseThrow(RuntimeException::new);
+        wishList.setTitle("Update title");
+
+        wishListRepository.save(wishList);
+    }
+
+    @Test
+    void findByTitleTest() {
+
+    }
 }
