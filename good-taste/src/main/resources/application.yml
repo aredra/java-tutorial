@@ -18,6 +18,8 @@ server:
 
 naver:
   client:
+    id: ''
+    secret: ''
   url:
     search:
       local: https://openapi.naver.com/v1/search/local.json
