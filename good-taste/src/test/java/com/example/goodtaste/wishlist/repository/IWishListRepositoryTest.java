@@ -2,14 +2,12 @@ package com.example.goodtaste.wishlist.repository;
 
 import com.example.goodtaste.wishlist.entity.WishListEntity;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.*;
 
 @Slf4j
 @SpringBootTest
@@ -32,7 +30,7 @@ class IWishListRepositoryTest {
 
     @Test
     void paging() {
-        Page<WishListEntity> wishListEntities = wishListRepository.findAll(PageRequest.of(1, 2));
+        Page<WishListEntity> wishListEntities = wishListRepository.findAll(PageRequest.of(1, 2, Sort.by(Sort.Order.desc("title"))));
 
         wishListEntities.getContent().forEach(item -> log.debug("{}", item));
 

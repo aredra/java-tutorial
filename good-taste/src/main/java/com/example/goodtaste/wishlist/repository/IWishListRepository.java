@@ -1,6 +1,9 @@
 package com.example.goodtaste.wishlist.repository;
 
 import com.example.goodtaste.wishlist.entity.WishListEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -48,4 +51,12 @@ public interface IWishListRepository extends JpaRepository<WishListEntity, Long>
     List<WishListEntity> findByTitleLike(String title);
 
     List<WishListEntity> findByTitleIs(String title);
+
+    List<WishListEntity> findTop1ByTitleOrderByIdDesc(String title);
+
+    List<WishListEntity> findFirstByTitleOrderByTitleDescAddressAsc(String title);
+
+    List<WishListEntity> findFirstByTitle(String title, Sort sort);
+
+    Page<WishListEntity> findByTitle(String title, Pageable pageable);
 }
