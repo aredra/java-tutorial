@@ -1,20 +1,22 @@
 package com.example.bookreview.domain;
 
+import com.example.bookreview.common.Gender;
+import com.example.bookreview.domain.listener.UserEntityListener;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+@EntityListeners(value = UserEntityListener.class)
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +28,10 @@ public class User {
     @NonNull
     private int age;
 
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<UserHistory> userHistories = new ArrayList<>();
 }
