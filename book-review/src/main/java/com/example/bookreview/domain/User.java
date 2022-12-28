@@ -16,6 +16,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @EntityListeners(value = UserEntityListener.class)
+@Table(name = "users")
 public class User extends BaseEntity {
 
     @Id
@@ -25,7 +26,6 @@ public class User extends BaseEntity {
     @NonNull
     private String name;
 
-    @NonNull
     private int age;
 
     @Enumerated(EnumType.STRING)

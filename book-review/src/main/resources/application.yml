@@ -1,6 +1,10 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb;NON_KEYWORDS=USER
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/book_review
+    username: jyseo
+    password:
+  #    url: jdbc:h2:mem:testdb;NON_KEYWORDS=USER
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -16,5 +20,10 @@ spring:
     hibernate:
       ddl-auto: update
     generate-ddl: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      platform: postgresql
 server:
   port: 7070
