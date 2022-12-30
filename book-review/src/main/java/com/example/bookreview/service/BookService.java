@@ -7,6 +7,7 @@ import com.example.bookreview.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
@@ -37,6 +38,7 @@ public class BookService {
         entityManager.remove(book);
     }
 
+    @Transactional
     public void putBookAndAuthor() {
         Book book = new Book();
         book.setTitle("JPA tutorial");
