@@ -23,9 +23,13 @@ public class Publisher {
 
     private int establishedYear;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private List<Book> books = new ArrayList<>();
+
+    public void addBook(Book book) {
+        this.books.add(book);
+    }
 
     public void addBooks(Book... books) {
         Collections.addAll(this.books, books);

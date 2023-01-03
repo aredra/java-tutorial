@@ -1,9 +1,7 @@
 package com.example.bookreview.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +10,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString(callSuper = true)
+@DynamicUpdate
 @NoArgsConstructor
 public class Book extends BaseEntity {
 

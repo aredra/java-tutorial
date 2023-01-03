@@ -7,6 +7,7 @@ import com.example.bookreview.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -47,6 +48,19 @@ public class BookService {
         Author author = new Author();
         author.setName("Dev1");
         authorRepository.save(author);
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void get(Long id) {
+        log.info(">>>>> {}", bookRepository.findById(id));
+
+        entityManager.clear();
+
+        log.info(">>>>> {}", bookRepository.findById(id));
+
+        // READ_UNCOMMITTED -> dirty read
+        // READ_COMMITTED -> unrepeatable read
+        // REPEATABLE_READ -> phantom read
     }
 
 }
