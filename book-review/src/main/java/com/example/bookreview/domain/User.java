@@ -4,6 +4,7 @@ import com.example.bookreview.common.Gender;
 import com.example.bookreview.domain.listener.UserEntityListener;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,8 +16,10 @@ import java.util.Objects;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 @EntityListeners(value = UserEntityListener.class)
 @Table(name = "users")
+@Where(clause = "leaved = false")
 public class User extends BaseEntity {
 
     @Id
@@ -30,6 +33,8 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    private boolean leaved;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

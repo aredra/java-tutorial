@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,15 @@ public class Book extends BaseEntity {
 
     @NonNull
     private String title;
+
+    private String category;
+
+    private OffsetDateTime publishedAt;
+
+    private OffsetDateTime outOfPrintAt;
+
+    @ManyToOne
+    private Publisher publisher;
 
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
