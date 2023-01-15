@@ -1,5 +1,7 @@
 package com.example.bookreview.domain;
 
+import com.example.bookreview.domain.converter.BookStatusConverter;
+import com.example.bookreview.repository.dto.BookStatusDto;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -28,6 +30,9 @@ public class Book extends BaseEntity {
     private OffsetDateTime publishedAt;
 
     private OffsetDateTime outOfPrintAt;
+
+    @Convert(converter = BookStatusConverter.class)
+    private BookStatusDto status;
 
     @ManyToOne
     private Publisher publisher;
