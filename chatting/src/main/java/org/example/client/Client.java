@@ -2,30 +2,52 @@ package org.example.client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static org.example.utility.MyLogger.log;
+import static org.example.utility.ResourceClose.closeAll;
 
 public class Client {
 
-    public static void main(String[] args) {
+    private final String host;
+    private final int port;
 
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
-        String host = "localhost";
-        int port = 8080;
+    private Socket socket;
+    private DataInputStream input;
+    private DataOutputStream output;
 
-        try (Socket socket = new Socket(host, port);
-             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             BufferedWriter output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))
-        ) {
-            executorService.execute(new CommandWriter(output));
-            String inputLine;
-            while ((inputLine = input.readLine()) != null) {
-                log(inputLine);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private ReadHandler readHandler;
+    private WriteHandler writeHandler;
+    private boolean closed = false;
+
+    public Client(String host, int port) {
+        this.host = host;
+        this.port = port;
     }
+
+    public void start() throws IOException {
+        log("Starting Client");
+        socket = new Socket(host, port);
+        input = new DataInputStream(socket.getInputStream());
+        output = new DataOutputStream(socket.getOutputStream());
+
+        readHandler = new ReadHandler(input, this);
+        writeHandler = new WriteHandler(output, this);
+
+        Thread readThread = new Thread(readHandler, "ReadHandler");
+        Thread writeThread = new Thread(writeHandler, "WriteHandler");
+        readThread.start();
+        writeThread.start();
+    }
+
+    public synchronized void close() {
+        if (closed) {
+            return;
+        }
+        writeHandler.close();
+        readHandler.close();
+        closeAll(socket, input, output);
+        log("Client closed.");
+        closed = true;
+    }
+
 }
